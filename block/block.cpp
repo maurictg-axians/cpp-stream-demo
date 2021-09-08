@@ -52,6 +52,7 @@ void Block::write(const char* data)
 
 	strcpy(tempBuffer, buffer); /* copy name into the new var */
 	strcat(tempBuffer, pBuf);
+	memset(buffer, 0, newSize);
 	memcpy(buffer, tempBuffer, newSize);
 	//buffer = tempBuffer;
 
