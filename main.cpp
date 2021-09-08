@@ -13,7 +13,20 @@ int main(int argc, char const *argv[])
     b.subscribe(&cout);
 
     b.writeToAll("Hello\n");
-    b.writeToAll("Hello\n");
 
+    b.write("Hello ");
+    b.write("This ");
+    b.write("Is ");
+    b.write("Fun ");
+
+    char* read = b.read();
+
+    b.write("Hey");
+
+    char* read2 = b.read();
+    cout << "read: " << read << endl;
+    cout << "read2: " << read2 << endl;
+
+    b.writeToAll("Bye!\n");
     return 0;
 }
