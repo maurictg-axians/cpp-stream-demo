@@ -10,23 +10,24 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     Block b;
+    b.write("Hello world!\n");
+
     b.subscribe(&cout);
+    b.subscribe(&cout);
+    b.unsubscribe(&cout);
 
-    b.writeToAll("Hello\n");
+    b.write("Hey.\n");
 
-    b.write("Hello ");
-    b.write("This ");
-    b.write("Is ");
-    b.write("Fun ");
+    b.unsubscribe(&cout);
+    b.write("Bye!\n");
+
+    b.clear();
+    b.write("hello");
 
     char* read = b.read();
+    printf("read: \"%s\"\n", read);
 
-    b.write("Hey");
+    b.subscribe(&cout);
 
-    char* read2 = b.read();
-    cout << "read: " << read << endl;
-    cout << "read2: " << read2 << endl;
-
-    b.writeToAll("Bye!\n");
     return 0;
 }

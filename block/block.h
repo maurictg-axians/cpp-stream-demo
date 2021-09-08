@@ -10,12 +10,24 @@ using namespace std;
 
 struct membuf : std::streambuf // derive because std::streambuf constructor is protected
 {
+    char* pointer;
+    size_t size;
+
    membuf(char* p, size_t size) 
    {
-       setp( p, p + size); // set start end end pointers
-       setg(p, p, p + size); //?
+       this->pointer = p;
+       this->size = size;
+       set();
    }
-   size_t written() {return pptr()-pbase();} // how many bytes were really written?
+
+   size_t written() {
+       return pptr()-pbase(); // how many bytes were really written?
+   }
+
+   void set() {
+       setp(pointer, pointer + size); // set 3 write pointers
+       setg(pointer, pointer, pointer + size); //set 3 read pointers
+   }
 };
 
 class Block {
@@ -27,11 +39,14 @@ private:
     ostream out_stream;
     istream in_stream;
 
+    void writeToAll(const char* data);
+
 public:
     Block();
     ~Block();
     void subscribe(ostream* stream);
-    void writeToAll(const char* data);
+    void unsubscribe(ostream* stream);
+    void clear();
     char* read();
     void write(const char* data);
     ostream* stream;
