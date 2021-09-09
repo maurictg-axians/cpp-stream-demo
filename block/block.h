@@ -1,5 +1,5 @@
 #ifndef _Block_h_
-#define _Server_h
+#define _Block_h_
 
 //include only in header if needed in parameters
 #include <iostream> //so this is not best practice, but i dont care for now

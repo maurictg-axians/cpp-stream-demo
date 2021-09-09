@@ -25,7 +25,7 @@ void Block::write(const char *data) {
     stream->write(data, strlen(data));
 
     //foreach to subscribers?? (after processing)
-    writeToAll(data);
+    //writeToAll(data); can also write to stream so..
 }
 
 void Block::subscribe(ostream* str) {
