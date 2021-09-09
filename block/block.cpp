@@ -2,7 +2,7 @@
 #include <cstring>
 #include <algorithm>
 
-Block::Block() : internal_buffer(new char[2048]), buffer(internal_buffer, 2048), out_stream(&buffer), in_stream(&buffer) {
+Block::Block() : internal_buffer(new char[BUFFER_SIZE]), buffer(internal_buffer, BUFFER_SIZE), out_stream(&buffer), in_stream(&buffer) {
     stream = &out_stream;
 }
 
@@ -10,7 +10,7 @@ Block::~Block() {
 }
 
 void Block::clear() {
-    memset(internal_buffer, 0, 2048);
+    memset(internal_buffer, 0, BUFFER_SIZE);
     buffer.set();
 }
 
@@ -32,7 +32,7 @@ void Block::subscribe(ostream* str) {
     this->streams.push_back(str);
 
     //Write history? (after processing)
-    str->write(internal_buffer, buffer.written());
+    //str->write(internal_buffer, buffer.written());
 }
 
 void Block::unsubscribe(ostream *str) {

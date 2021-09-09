@@ -8,6 +8,8 @@
 
 using namespace std;
 
+const int BUFFER_SIZE = 256;
+
 struct membuf : std::streambuf // derive because std::streambuf constructor is protected
 {
     char* pointer;
